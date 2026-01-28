@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Decision Tree</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: #1a1a1a; color: #fff; padding: 20px; }
+        .decision-tree { max-width: 1200px; margin: 0 auto; }
+        .command-case { margin: 20px 0; padding: 15px; border: 2px solid #444; border-radius: 8px; }
+        .command-title { color: #4ecdc4; font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .condition { margin: 10px 0; padding-left: 20px; }
+        .if-condition { color: #feca57; }
+        .else-condition { color: #ff6b6b; }
+        .action { color: #51cf66; margin: 5px 0; padding-left: 40px; }
+        .animation-type { background: #2d2d2d; padding: 8px; border-radius: 4px; margin: 5px 0; }
+        .node-type { color: #ff9ff3; }
+        .special-case { background: #3d3d3d; padding: 10px; border-left: 4px solid #feca57; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="decision-tree">
+        <h1 style="text-align: center; color: #4ecdc4;">Git Animation Decision Tree Logic</h1>
+        
+        <div class="command-case">
+            <div class="command-title">git init</div>
+            <div class="condition if-condition">IF repository not initialized:</div>
+            <div class="action">✓ Create init node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with 0ms delay</div>
+            <div class="action">✓ Color: #2ecc71 (green)</div>
+            <div class="action">✓ Position: First position on main branch</div>
+            <div class="condition else-condition">ELSE (already initialized):</div>
+            <div class="action">✗ No animation - show error message</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git add [files]</div>
+            <div class="condition if-condition">IF files exist and not already staged:</div>
+            <div class="action">✓ Create add node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #2196F3 (blue)</div>
+            <div class="action">✓ Position: Next position on current branch</div>
+            <div class="condition else-condition">ELSE (no files or already staged):</div>
+            <div class="action">✗ No animation - show info/error message</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git commit -m "message"</div>
+            <div class="condition if-condition">IF there are staged files:</div>
+            <div class="action">✓ Create commit node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #FF9800 (orange)</div>
+            <div class="action">✓ Position: Next position on current branch</div>
+            <div class="action">✓ Include commit hash (first 7 chars)</div>
+            <div class="condition else-condition">ELSE (no staged files):</div>
+            <div class="action">✗ No animation - show "nothing to commit" error</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git branch [name]</div>
+            <div class="condition if-condition">IF branch name provided and doesn't exist:</div>
+            <div class="action">✓ Create branch node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #9C27B0 (purple)</div>
+            <div class="action">✓ Position: On new branch line at current HEAD position</div>
+            <div class="condition else-condition">IF no arguments (git branch):</div>
+            <div class="action">✗ No animation - just show branch list in terminal</div>
+            <div class="condition else-condition">ELSE (branch exists):</div>
+            <div class="action">✗ No animation - show error</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git switch [branch]</div>
+            <div class="condition if-condition">IF branch exists:</div>
+            <div class="action">✓ Create switch node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #27ae60 (green)</div>
+            <div class="action">✓ Position: On target branch line</div>
+            <div class="action">✓ Update current branch context for future nodes</div>
+            <div class="condition else-condition">IF branch doesn't exist:</div>
+            <div class="action">✗ No animation - show error</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git switch -c [new-branch]</div>
+            <div class="condition if-condition">IF new branch name doesn't exist:</div>
+            <div class="action">✓ Create switch node (acts as both branch + switch)</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #27ae60 (green)</div>
+            <div class="action">✓ Position: On new branch line at current HEAD position</div>
+            <div class="action">✓ Update current branch context</div>
+            <div class="condition else-condition">ELSE (branch exists):</div>
+            <div class="action">✗ No animation - show error</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git merge [branch]</div>
+            <div class="condition if-condition">IF branch exists and has commits:</div>
+            <div class="action">✓ Create merge node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #F44336 (red)</div>
+            <div class="action">✓ Position: On current branch after merge point</div>
+            <div class="action">✓ Draw merge lines from source branch</div>
+            <div class="condition else-condition">ELSE (no branch or no commits):</div>
+            <div class="action">✗ No animation - show error/info</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git push origin [branch]</div>
+            <div class="condition if-condition">IF remote exists and branch has commits:</div>
+            <div class="action">✓ Create push node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #607D8B (gray)</div>
+            <div class="action">✓ Position: On current branch after last commit</div>
+            <div class="action">✓ Draw dashed line to "remote" area</div>
+            <div class="condition else-condition">ELSE (no remote or no commits):</div>
+            <div class="action">✗ No animation - show error</div>
+        </div>
+
+        <div class="command-case">
+            <div class="command-title">git pull origin [branch]</div>
+            <div class="condition if-condition">IF remote exists and has new commits:</div>
+            <div class="action">✓ Create pull node</div>
+            <div class="action">✓ Show animation: scale(0) → scale(1) with (index × 100ms) delay</div>
+            <div class="action">✓ Color: #795548 (brown)</div>
+            <div class="action">✓ Position: On current branch after pull point</div>
+            <div class="action">✓ Draw incoming commits from remote</div>
+            <div class="condition else-condition">ELSE (no remote or up to date):</div>
+                <div class="action">✓ Create pull node with "Already up to date" message</div>
+                <div class="action">✓ Show animation but minimal visual impact</div>
+        </div>
+
+        <div class="special-case">
+            <h3 style="color: #feca57;">Special Animation Cases</h3>
+            
+            <div class="command-title">git switch -</div>
+            <div class="action">✓ Create switch node</div>
+            <div class="action">✓ Animate to previous branch (track branch history)</div>
+            
+            <div class="command-title">git reset HEAD~1</div>
+            <div class="action">✓ Create reset node</div>
+            <div class="action">✓ Animate with special "rewind" effect (maybe rotate)</div>
+            <div class="action">✓ Update HEAD pointer backwards</div>
+            
+            <div class="command-title">git clone [url]</div>
+            <div class="action">✓ Create clone node</div>
+            <div class="action">✓ Animate with "download" effect (scale + fade)</div>
+            <div class="action">✓ Populate with existing commits from remote</div>
+        </div>
+
+        <div class="special-case">
+            <h3 style="color: #feca57;">Animation Logic Rules</h3>
+            
+            <div class="animation-type">
+                <strong>Chronological Order:</strong><br>
+                IF nodes are sorted by timestamp THEN<br>
+                &nbsp;&nbsp;&nbsp;delay = node_index × 100ms<br>
+                ELSE<br>
+                &nbsp;&nbsp;&nbsp;delay = 0 (all animate at once)
+            </div>
+            
+            <div class="animation-type">
+                <strong>Node Visibility:</strong><br>
+                IF node.type === 'switch' AND no branch data THEN<br>
+                &nbsp;&nbsp;&nbsp;SKIP (don't animate, only show in timeline log)<br>
+                ELSE IF node.type === 'branch' AND no branch data THEN<br>
+                &nbsp;&nbsp;&nbsp;SKIP (git branch listing, not creation)<br>
+                ELSE<br>
+                &nbsp;&nbsp;&nbsp;SHOW with animation
+            </div>
+            
+            <div class="animation-type">
+                <strong>Branch Positioning:</strong><br>
+                IF node creates branch THEN<br>
+                &nbsp;&nbsp;&nbsp;position_on_new_branch_line()<br>
+                ELSE IF node switches branch THEN<br>
+                &nbsp;&nbsp;&nbsp;position_on_target_branch()<br>
+                ELSE<br>
+                &nbsp;&nbsp;&nbsp;position_on_current_branch()
+            </div>
+            
+            <div class="animation-type">
+                <strong>Error Handling:</strong><br>
+                IF command fails THEN<br>
+                &nbsp;&nbsp;&nbsp;NO animation<br>
+                &nbsp;&nbsp;&nbsp;Show error in terminal<br>
+                ELSE IF command succeeds but no state change THEN<br>
+                &nbsp;&nbsp;&nbsp;MINIMAL animation (info node)<br>
+                ELSE<br>
+                &nbsp;&nbsp;&nbsp;FULL animation with color and position
+            </div>
+        </div>
+
+        <div class="special-case">
+            <h3 style="color: #feca57;">Current Implementation Check</h3>
+            <div class="action" style="color: #51cf66;">✓ getTimelineData() sorts nodes by timestamp</div>
+            <div class="action" style="color: #51cf66;">✓ animateNodeAppearance() accepts delay parameter</div>
+            <div class="action" style="color: #51cf66;">✓ drawCommitNodes() uses index × 100ms delay</div>
+            <div class="action" style="color: #51cf66;">✓ Switch nodes without branch data are skipped</div>
+            <div class="action" style="color: #51cf66;">✓ Branch listing nodes are skipped</div>
+            <div class="action" style="color: #ff9ff3;">? Error handling for failed commands needs verification</div>
+            <div class="action" style="color: #ff9ff3;">? Special animations for reset/clone need implementation</div>
+        </div>
+    </div>
+</body>
+</html>

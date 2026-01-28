@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Functionality Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Git Timeline Visualizer - Functionality Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Command Execution Test</h2>
+        <button onclick="testGitInit()">Test git init</button>
+        <button onclick="testGitAdd()">Test git add</button>
+        <button onclick="testGitCommit()">Test git commit</button>
+        <div id="command-output"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. UI Elements Test</h2>
+        <button onclick="testUIElements()">Test UI Elements</button>
+        <div id="ui-output"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Timeline Test</h2>
+        <button onclick="testTimeline()">Test Timeline</button>
+        <div id="timeline-output"></div>
+    </div>
+
+    <script src="git-timeline-browser.js"></script>
+    <script src="git-command-processor-browser.js"></script>
+    <script>
+        let gitProcessor;
+        
+        function log(elementId, message, isError = false) {
+            const element = document.getElementById(elementId);
+            const className = isError ? 'error' : 'success';
+            element.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+        
+        async function testGitInit() {
+            try {
+                log('command-output', 'Testing git init...');
+                await gitProcessor.processCommand('git init');
+                log('command-output', '✓ git init executed successfully');
+            } catch (error) {
+                log('command-output', '✗ git init failed: ' + error.message, true);
+            }
+        }
+        
+        async function testGitAdd() {
+            try {
+                log('command-output', 'Testing git add...');
+                await gitProcessor.processCommand('git add index.html');
+                log('command-output', '✓ git add executed successfully');
+            } catch (error) {
+                log('command-output', '✗ git add failed: ' + error.message, true);
+            }
+        }
+        
+        async function testGitCommit() {
+            try {
+                log('command-output', 'Testing git commit...');
+                await gitProcessor.processCommand('git commit -m "Test commit"');
+                log('command-output', '✓ git commit executed successfully');
+            } catch (error) {
+                log('command-output', '✗ git commit failed: ' + error.message, true);
+            }
+        }
+        
+        function testUIElements() {
+            log('ui-output', 'Testing UI elements...');
+            
+            // Test terminal elements
+            const terminalInput = document.getElementById('terminal-input');
+            const terminalOutput = document.getElementById('terminal-output');
+            const timelineLog = document.getElementById('timeline-log');
+            
+            if (terminalInput) log('ui-output', '✓ terminal-input found');
+            else log('ui-output', '✗ terminal-input not found', true);
+            
+            if (terminalOutput) log('ui-output', '✓ terminal-output found');
+            else log('ui-output', '✗ terminal-output not found', true);
+            
+            if (timelineLog) log('ui-output', '✓ timeline-log found');
+            else log('ui-output', '✗ timeline-log not found', true);
+        }
+        
+        function testTimeline() {
+            log('timeline-output', 'Testing timeline functionality...');
+            
+            try {
+                const timelineData = gitProcessor.timeline.getTimelineData();
+                log('timeline-output', `✓ Timeline data retrieved: ${timelineData.nodes.length} nodes, ${timelineData.edges.length} edges`);
+                
+                const currentBranch = gitProcessor.timeline.getCurrentBranch();
+                log('timeline-output', `✓ Current branch: ${currentBranch || 'none'}`);
+                
+                const commits = gitProcessor.timeline.getCommits();
+                log('timeline-output', `✓ Commits: ${commits.length}`);
+                
+            } catch (error) {
+                log('timeline-output', '✗ Timeline test failed: ' + error.message, true);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                gitProcessor = new GitCommandProcessor();
+                window.gitProcessor = gitProcessor;
+                log('command-output', '✓ GitCommandProcessor initialized successfully');
+            } catch (error) {
+                log('command-output', '✗ Initialization failed: ' + error.message, true);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>JavaScript Debug Test</h1>
+    <div id="test-output"></div>
+    
+    <script src="git-timeline-browser.js"></script>
+    <script src="git-command-processor-browser.js"></script>
+    <script>
+        const output = document.getElementById('test-output');
+        
+        function log(message) {
+            console.log(message);
+            output.innerHTML += message + '<br>';
+        }
+        
+        try {
+            log('Testing class definitions...');
+            
+            // Test GitNode class
+            const gitNode = new GitNode('test1', 'commit', { message: 'test' });
+            log('✓ GitNode class works');
+            
+            // Test GitTimeline class
+            const gitTimeline = new GitTimeline();
+            log('✓ GitTimeline class works');
+            
+            // Test GitCommandProcessor class
+            const gitProcessor = new GitCommandProcessor();
+            log('✓ GitCommandProcessor class works');
+            
+            // Test key methods
+            log('✓ getLocalFiles: ' + typeof gitProcessor.getLocalFiles);
+            log('✓ processCommand: ' + typeof gitProcessor.processCommand);
+            log('✓ addTerminalOutput: ' + typeof gitProcessor.addTerminalOutput);
+            log('✓ getTerminalOutput: ' + typeof gitProcessor.getTerminalOutput);
+            log('✓ clearTerminalOutput: ' + typeof gitProcessor.clearTerminalOutput);
+            
+            // Test timeline methods
+            log('✓ getTimelineData: ' + typeof gitProcessor.timeline.getTimelineData);
+            log('✓ getCurrentBranch: ' + typeof gitProcessor.timeline.getCurrentBranch);
+            log('✓ getCommits: ' + typeof gitProcessor.timeline.getCommits);
+            
+            log('All tests passed! ✓');
+            
+        } catch (error) {
+            log('✗ Error: ' + error.message);
+            console.error(error);
+        }
+    </script>
+</body>
+</html>

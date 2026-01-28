@@ -1,0 +1,18 @@
+{
+  "name": "git-state-space-visualizer",
+  "version": "1.0.0",
+  "description": "Visualize Git workflow state space trees",
+  "main": "main_second.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js",
+    "test": "echo \"Run: node test_visualizer.js\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsdom": "^21.1.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

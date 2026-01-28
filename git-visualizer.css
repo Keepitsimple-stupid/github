@@ -1,0 +1,57 @@
+/* Terminal output styling */
+.terminal-line {
+    margin: 2px 0;
+    padding: 2px 0;
+}
+
+.terminal-line.command {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.terminal-line.error {
+    color: #ff6b6b;
+}
+
+.terminal-line.success {
+    color: #51cf66;
+}
+
+.terminal-line.info {
+    color: #74c0fc;
+}
+
+/* Timeline visualization styles */
+.timeline-node {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #0a1929;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.timeline-node:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.timeline-edge {
+    stroke: #4ecdc4;
+    stroke-width: 2;
+    fill: none;
+    transition: all 0.3s ease;
+}
+
+.timeline-edge.bold {
+    stroke-width: 4;
+    stroke: #ff6b6b;
+}
+
+.timeline-edge.merge {
+    stroke: #ff9ff3;
+    stroke-dasharray: 5, 5;
+}
